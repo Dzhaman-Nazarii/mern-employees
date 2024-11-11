@@ -4,11 +4,12 @@ const jwt = require("jsonwebtoken");
 
 /**
  * @route POST /api/user/login
- * @desc Login
+ * @desc Login user
  * @access Public
  */
 const login = async (req, res) => {
-	const { email, password } = req.body;
+	try {
+		const { email, password } = req.body;
 
 	if (!email || !password) {
 		return res
@@ -36,15 +37,19 @@ const login = async (req, res) => {
 	} else {
 		return res.status(400).json({ message: "Incorrect email or password" });
 	}
+	} catch (error) {
+		return res.status(400).json({ message: "Something went wrong" });
+	}
 };
 
 /**
  * @route POST /api/user/register
- * @desc Register
+ * @desc Register user
  * @access Public
  */
 const register = async (req, res) => {
-	const { name, email, password } = req.body;
+	try {
+		const { name, email, password } = req.body;
 	if (!email || !password || !name) {
 		return res.status(400).json({ message: "Please enter require fields" });
 	}
@@ -82,15 +87,22 @@ const register = async (req, res) => {
 	} else {
 		return res.status(400).json({ message: "Error with create user" });
 	}
+	} catch (error) {
+		return res.status(400).json({ message: "Something went wrong" });
+	}
 };
 
 /**
  * @route GET /api/user/current
- * @desc Current
+ * @desc Current user
  * @access Private
  */
 const current = async (req, res) => {
-	return res.status(200).json(req.user);
+	try {
+		return res.status(200).json(req.user);
+	} catch (error) {
+		return res.status(400).json({ message: "Something went wrong" });
+	}
 };
 
 module.exports = { login, register, current };
