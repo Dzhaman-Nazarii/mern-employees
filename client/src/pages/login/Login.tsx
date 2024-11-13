@@ -35,7 +35,7 @@ export const Login: FC = () => {
 						direction="vertical"
 						size="large">
 						<Typography.Text>
-							No account?{" "}
+							Don't have an account?{" "}
 							<Link to={Paths.register}>Register</Link>
 						</Typography.Text>
 					</Space>
