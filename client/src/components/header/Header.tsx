@@ -1,5 +1,5 @@
 import { FC } from "react";
-import { Layout, Space, Typography } from "antd";
+import { Layout, Space } from "antd";
 import { LoginOutlined, TeamOutlined, UserOutlined } from "@ant-design/icons";
 import { Button } from "../button/Button";
 import { Link } from "react-router-dom";
@@ -10,17 +10,17 @@ export const Header: FC = () => {
 	return (
 		<Layout.Header className={css.header}>
 			<Space>
-				<TeamOutlined className={css.teamIcon} />
 				<Link to={Paths.home}>
-					<Button type="primary">
-						<Typography.Title level={1}>Employees</Typography.Title>
+					<Button type="default">
+					<TeamOutlined className={css.teamIcon} />
+					Employees
 					</Button>
 				</Link>
 			</Space>
 			<Space>
 				<Link to={Paths.register}>
 					<Button
-						type="primary"
+						type="default"
 						icon={<UserOutlined />}>
 						Register
 					</Button>
@@ -29,7 +29,7 @@ export const Header: FC = () => {
 			<Space>
 				<Link to={Paths.login}>
 					<Button
-						type="primary"
+						type="default"
 						icon={<LoginOutlined />}>
 						Login
 					</Button>
