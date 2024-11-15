@@ -34,11 +34,14 @@ export const Employees: FC = () => {
 	const user = useSelector(selectUser);
 	const { data, isLoading } = useGetAllEmployeesQuery();
 
+	const onAddUser = () => {
+		navigate(Paths.employeeAdd);
+	};
+
 	useEffect(() => {
 		if (!user) {
 			navigate("/login");
 		} else {
-
 		}
 	}, [user, navigate]);
 
@@ -46,7 +49,7 @@ export const Employees: FC = () => {
 		<Layout>
 			<Button
 				type="default"
-				onClick={() => null}
+				onClick={onAddUser}
 				icon={<PlusCircleOutlined />}>
 				Add
 			</Button>
