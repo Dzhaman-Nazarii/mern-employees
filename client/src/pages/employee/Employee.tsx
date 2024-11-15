@@ -59,9 +59,14 @@ export const Employee: FC = () => {
 				title="Info about employee"
 				bordered={true}>
 				<Descriptions.Item
-					label="Name"
+					label="First name"
 					span={3}>
-					{`${data.firstName} ${data.lastName}`}
+					{data.firstName}
+				</Descriptions.Item>
+				<Descriptions.Item
+					label="Last name"
+					span={3}>
+					{data.lastName}
 				</Descriptions.Item>
 				<Descriptions.Item
 					label="Age"

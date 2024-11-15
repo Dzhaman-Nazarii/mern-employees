@@ -13,9 +13,10 @@ import { selectUser } from "../../features/auth/authSlice";
 
 const columns: ColumnsType<Employee> = [
 	{
-		title: "Name",
-		dataIndex: "firstName",
-		key: "firstName",
+		title: "Full Name",
+		dataIndex: "",
+		key: "fullName",
+		render: (record) => `${record.firstName} ${record.lastName}`,
 	},
 	{
 		title: "Age",
