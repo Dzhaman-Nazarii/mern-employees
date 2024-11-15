@@ -1,12 +1,36 @@
-import { FC } from "react";
+import { FC, useState } from "react";
 import { Layout } from "../../components/layout/Layout";
 import { Button, Card, Form, Row, Space, Typography } from "antd";
 import { Input } from "../../components/input/Input";
 import { PasswordInput } from "../../components/passwordInput/PasswordInput";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Paths } from "../../paths";
+import { useRegisterMutation } from "../../app/services/auth";
+import { User } from "@prisma/client";
+import { isErrorWithMessage } from "../../utils/isErrorWithMessage";
+import { ErrorMessage } from "../../components/errorMessage/ErrorMessage";
+
+type RegisterData = Omit<User, "id"> & { confirmPassword: string };
 
 export const Register: FC = () => {
+	const navigate = useNavigate();
+	const [error, setError] = useState("");
+	const [registerUser] = useRegisterMutation();
+
+	const handleRegister = async (data: RegisterData) => {
+		try {
+			await registerUser(data).unwrap();
+			navigate("/");
+		} catch (error) {
+			const maybeError = isErrorWithMessage(error);
+			if (maybeError) {
+				setError(error.data.message);
+			} else {
+				setError("Something went wrong");
+			}
+		}
+	};
+
 	return (
 		<Layout>
 			<Row
@@ -15,7 +39,7 @@ export const Register: FC = () => {
 				<Card
 					title="Register form"
 					style={{ width: "30rem" }}>
-					<Form onFinish={() => console.log("Finish form")}>
+					<Form onFinish={handleRegister}>
 						<Input
 							type="text"
 							name="name"
@@ -47,6 +71,7 @@ export const Register: FC = () => {
 							Have an account?{" "}
 							<Link to={Paths.login}>Log in</Link>
 						</Typography.Text>
+						<ErrorMessage message={error} />
 					</Space>
 				</Card>
 			</Row>
