@@ -7,15 +7,15 @@ import reportWebVitals from "./reportWebVitals";
 import { Paths } from "./paths";
 import { Login } from "./pages/login/Login";
 import { Register } from "./pages/register/Register";
-import { Home } from "./pages/home/Home";
 import { ConfigProvider, theme } from "antd";
 import { Auth } from "./features/auth/Auth";
 import "./index.css";
+import { Employees } from "./pages/employees/Employees";
 
 const router = createBrowserRouter([
 	{
 		path: Paths.home,
-		element: <Home />,
+		element: <Employees />,
 	},
 	{
 		path: Paths.login,
